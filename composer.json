@@ -1,0 +1,44 @@
+{
+    "$schema": "https://getcomposer.org/schema.json",
+    "name": "funseco/votes-plugin",
+    "description": "Funseco chat votes — /skip /replay /ladder /endround /kick /ignore /y",
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "php": "^8.2",
+        "funseco/core": "@dev"
+    },
+    "autoload": {
+        "psr-4": {
+            "Funseco\\Votes\\": "src/"
+        }
+    },
+    "extra": {
+        "funseco": {
+            "id": "votes",
+            "name": "Votes",
+            "description": "chat votes — /skip /replay /ladder /endround /kick /ignore /y",
+            "provider": "Funseco\\Votes\\VotesServiceProvider"
+        }
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "preferred-install": "dist",
+        "sort-packages": true
+    },
+    "require-dev": {
+        "funseco/admin-plugin": "@dev",
+        "funseco/jukebox-plugin": "@dev",
+        "funseco/pay2play-plugin": "@dev",
+        "funseco/timelimit-plugin": "@dev",
+        "mockery/mockery": "^1.6",
+        "orchestra/testbench": "^10.0",
+        "phpunit/phpunit": "^11.5.3"
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Funseco\\Votes\\Tests\\": "tests/"
+        }
+    }
+}
