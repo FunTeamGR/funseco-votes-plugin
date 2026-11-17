@@ -54,7 +54,7 @@ class VotePanel
     /** Two-second preview after choosing a panel with /votepanel. */
     public function preview(Player $player, bool $named): void
     {
-        $this->show($player, format_colors(($named ? '{#vote}' : '{#emotic}').'Yes - F5'), '$333No - F6', 2);
+        $this->show($player, format_colors(($named ? '{#pink}' : '{#orange}').'Yes - F5'), '$333No - F6', 2);
     }
 
     public function hide(Player $player): void

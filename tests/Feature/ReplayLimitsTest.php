@@ -124,7 +124,7 @@ class ReplayLimitsTest extends TestCase
 
         Chat::resolve('/replay', 'bob');
         $this->assertNull(app(VoteBox::class)->running());
-        $this->assertSame([format_colors('{#server}> {#vote}No more than {#highlite}2{#vote} replays per track allowed!')],
+        $this->assertSame([format_colors('{#server}> {#pink}No more than {#highlite}2{#pink} replays per track allowed!')],
             array_values(array_map(fn ($a) => $a[0], array_filter($this->sent('ChatSendServerMessageToLogin'), fn ($a) => $a[1] === 'bob'))));
     }
 

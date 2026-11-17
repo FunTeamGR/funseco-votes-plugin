@@ -67,17 +67,17 @@ class VotesTest extends TestCase
     {
         // 6 players × 0.6 = 4 votes
         Chat::resolve('/skip', 'a');
-        $this->assertSame(format_colors("{#server}>> {#highlite}Alice{#vote} is requesting to {#highlite}Skip this Track{#vote}.\n{#vote}This will require {#highlite}4{#vote} votes to pass. Type {#highlite}/y{#vote} to vote yes."), $this->broadcasts()[0]);
+        $this->assertSame(format_colors("{#server}>> {#highlite}Alice{#pink} is requesting to {#highlite}Skip this Track{#pink}.\n{#pink}This will require {#highlite}4{#pink} votes to pass. Type {#highlite}/y{#pink} to vote yes."), $this->broadcasts()[0]);
 
         foreach (['a', 'b', 'c'] as $login) {
             Chat::resolve('/y', $login);
         }
         $this->assertSame([], $this->sent('NextChallenge'));
-        $this->assertSame(format_colors('{#server}>> {#highlite}1{#vote} more vote needed to {#highlite}Skip this Track{#vote}. Type {#highlite}/y{#vote} to vote yes.'), $this->lastBroadcast());
+        $this->assertSame(format_colors('{#server}>> {#highlite}1{#pink} more vote needed to {#highlite}Skip this Track{#pink}. Type {#highlite}/y{#pink} to vote yes.'), $this->lastBroadcast());
 
         Chat::resolve('/y', 'd');
         $this->assertSame([[]], $this->sent('NextChallenge'));
-        $this->assertContains(format_colors('{#server}>> {#vote}Vote Passed! Server to {#highlite}Skip this Track{#vote}.'), $this->broadcasts());
+        $this->assertContains(format_colors('{#server}>> {#pink}Vote Passed! Server to {#highlite}Skip this Track{#pink}.'), $this->broadcasts());
         $this->assertNull(app(VoteBox::class)->running());
     }
 
@@ -127,7 +127,7 @@ class VotesTest extends TestCase
 
         $this->travel(60)->seconds();
         app(VoteBox::class)->tick();
-        $this->assertSame(format_colors('{#server}>> {#vote}Vote to {#highlite}Skip this Track{#vote} expired by {#highlite}Server{#vote}!'), $this->lastBroadcast());
+        $this->assertSame(format_colors('{#server}>> {#pink}Vote to {#highlite}Skip this Track{#pink} expired by {#highlite}Server{#pink}!'), $this->lastBroadcast());
         $this->assertNull(app(VoteBox::class)->running());
     }
 
@@ -147,7 +147,7 @@ class VotesTest extends TestCase
 
         app(VoteBox::class)->mapEnded();
 
-        $this->assertSame(format_colors('{#server}>> {#vote}Current vote cancelled!'), $this->lastBroadcast());
+        $this->assertSame(format_colors('{#server}>> {#pink}Current vote cancelled!'), $this->lastBroadcast());
         Event::assertDispatched(VoteCancelled::class, fn ($e) => $e->type === 'skip');
     }
 
@@ -167,7 +167,7 @@ class VotesTest extends TestCase
     public function test_kick_vote_kicks_and_staff_are_protected()
     {
         Chat::resolve('/kick boss', 'a');
-        $this->assertSame(format_colors('{#server}>> {#vote}Player {#highlite}Alice{#vote} fruitlessly tried to kick-vote {#logina}admin {#highlite}Boss{#vote}!'), $this->broadcasts()[0]);
+        $this->assertSame(format_colors('{#server}>> {#pink}Player {#highlite}Alice{#pink} fruitlessly tried to kick-vote {#logina}admin {#highlite}Boss{#pink}!'), $this->broadcasts()[0]);
         $this->assertNull(app(VoteBox::class)->running());
 
         Chat::resolve('/kick c', 'a');
@@ -214,7 +214,7 @@ class VotesTest extends TestCase
         app(VoteBox::class)->mapStarted($this->map);
 
         Chat::resolve('/replay', 'b');
-        $this->assertSame([format_colors('{#server}> {#vote}No more than {#highlite}1{#vote} replay per track allowed!')], $this->toLogin('b'));
+        $this->assertSame([format_colors('{#server}> {#pink}No more than {#highlite}1{#pink} replay per track allowed!')], $this->toLogin('b'));
     }
 
     public function test_restart_keeps_the_running_vote()
@@ -269,7 +269,7 @@ class VotesTest extends TestCase
         $this->assertSame([format_colors('{#server}> {#error}You didn\'t start the current vote!')], $this->toLogin('b'));
 
         Chat::resolve('/cancel', 'a');
-        $this->assertSame(format_colors('{#server}>> {#vote}Vote to {#highlite}Skip this Track{#vote} cancelled by {#highlite}Alice{#vote}!'), $this->lastBroadcast());
+        $this->assertSame(format_colors('{#server}>> {#pink}Vote to {#highlite}Skip this Track{#pink} cancelled by {#highlite}Alice{#pink}!'), $this->lastBroadcast());
     }
 
     public function test_vote_panel_yes_button_votes()

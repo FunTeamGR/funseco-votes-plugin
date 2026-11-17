@@ -67,7 +67,7 @@ class ExtendVoteTest extends TestCase
         $this->assertSame([], $this->sent('ChooseNextChallenge'));
         $this->assertSame([], $dispatched);
         $all = $this->messages('ChatSendServerMessage');
-        $this->assertSame(format_colors('{#server}>> {#vote}Track time extended by {#highlite}5:00{#vote} minutes!'), end($all));
+        $this->assertSame(format_colors('{#server}>> {#pink}Track time extended by {#highlite}5:00{#pink} minutes!'), end($all));
     }
 
     public function test_paused_timer_stays_paused()
@@ -100,7 +100,7 @@ class ExtendVoteTest extends TestCase
 
         Chat::resolve('/extend', 'b');
         $toB = array_values(array_map(fn ($a) => $a[0], array_filter($this->sent('ChatSendServerMessageToLogin'), fn ($a) => $a[1] === 'b')));
-        $this->assertSame([format_colors('{#server}> {#vote}No more than {#highlite}1{#vote} replay per track allowed!')], $toB);
+        $this->assertSame([format_colors('{#server}> {#pink}No more than {#highlite}1{#pink} replay per track allowed!')], $toB);
     }
 
     private function assertPlainReplay(FlexiTimer $timer, int $left): void

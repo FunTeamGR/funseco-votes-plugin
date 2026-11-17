@@ -31,6 +31,6 @@ class HelpVoteCommand implements Command, Described
         $lines[] = ['Players can vote with {#black}/y$g until the required number of votes'];
         $lines[] = ['is reached, or the vote expires.'];
 
-        Window::show($player, '{#vote}Chat-based votes$g are available for these actions:', $lines, [1.0, 0.1, 0.2, 0.7], ['Icons64x64_1', 'TrackInfo', -0.01]);
+        Window::show($player, '{#pink}Chat-based votes$g are available for these actions:', $lines, [1.0, 0.1, 0.2, 0.7], ['Icons64x64_1', 'TrackInfo', -0.01]);
     }
 }
